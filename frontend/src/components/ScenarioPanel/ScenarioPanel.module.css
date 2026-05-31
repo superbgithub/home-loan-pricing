@@ -1,0 +1,20 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.loading {
+  color: #1a3c5e;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}
+
+.errorBanner {
+  background: #fdecea;
+  border: 1px solid #e57373;
+  border-radius: 4px;
+  color: #c0392b;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,30 @@
+.panel {
+  background: #f8fafb;
+  border: 1px solid #d1e3f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.label {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: #1a3c5e;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+  margin: 0;
+}
+
+.grid dt {
+  color: #555;
+  font-size: 0.875rem;
+}
+
+.grid dd {
+  margin: 0;
+  font-weight: 600;
+  color: #111;
+}

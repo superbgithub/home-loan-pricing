@@ -1,0 +1,51 @@
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d1e3f0;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1a3c5e;
+}
+
+.modeToggle {
+  background: #fff;
+  color: #1a3c5e;
+  border: 2px solid #1a3c5e;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.modeToggle:hover {
+  background: #e8f0f7;
+}
+
+.singleLayout {
+  max-width: 480px;
+}
+
+.comparisonLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .comparisonLayout {
+    grid-template-columns: 1fr;
+  }
+}

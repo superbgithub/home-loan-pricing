@@ -1,0 +1,99 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.activeToggle {
+  background: #1a3c5e;
+  color: #fff;
+  border: 2px solid #1a3c5e;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.inactiveToggle {
+  background: #fff;
+  color: #1a3c5e;
+  border: 2px solid #1a3c5e;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.field label {
+  font-size: 0.875rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.field input,
+.field select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 2px solid #1a3c5e;
+  border-color: #1a3c5e;
+}
+
+.error {
+  color: #c0392b;
+  font-size: 0.8rem;
+}
+
+.fieldset {
+  border: 1px solid #d1e3f0;
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fieldset legend {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a3c5e;
+  padding: 0 0.25rem;
+}
+
+.submit {
+  background: #1a3c5e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  align-self: flex-start;
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit:hover:not(:disabled) {
+  background: #0f2540;
+}
