@@ -1,50 +1,87 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+## Sync Impact Report
+- Version change: (none) → 1.0.0
+- Added sections: Core Principles (I–V), Technology Constraints, Development Workflow, Governance
+- Removed sections: N/A (initial creation from template)
+- Templates requiring updates:
+  - .specify/templates/plan-template.md ✅ aligned (Constitution Check section present)
+  - .specify/templates/spec-template.md ✅ aligned (no constitution-specific sections required)
+  - .specify/templates/tasks-template.md ✅ aligned (phase structure consistent with principles)
+- Deferred TODOs: None
+-->
+
+# Home Loan Pricing Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Financial Precision
+All monetary calculations MUST use fixed-point or decimal arithmetic (never IEEE 754
+floating point) to prevent rounding errors in loan amounts, interest rates, and payments.
+Currency values MUST be stored and transmitted in the smallest representable unit (e.g.,
+cents for USD). Rounding rules MUST follow applicable regulatory standards (e.g.,
+Regulation Z half-up rounding for APR disclosures).
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Regulatory Compliance
+Loan pricing logic MUST comply with applicable federal and state lending laws, including
+TILA (Truth in Lending Act), RESPA, ECOA, and state usury caps. Any pricing rule with a
+legal basis MUST reference the specific regulation it implements as a code comment or
+linked document. Compliance checks MUST execute before any rate or fee is surfaced to
+an end user.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Test-First (NON-NEGOTIABLE)
+TDD is mandatory for all pricing logic, rate calculations, and compliance rules. Tests
+MUST be written and confirmed to fail before any implementation begins. The
+Red-Green-Refactor cycle is strictly enforced. No implementation task is considered
+started until its corresponding test exists and is red.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Auditability
+Every pricing decision, rate change, or fee adjustment MUST be logged with a timestamp,
+actor identity, inputs, and outputs. Audit logs MUST be immutable and retained per
+applicable regulatory retention requirements. Pricing engine outputs MUST be reproducible
+from stored inputs alone; no hidden mutable state is permitted in the pricing pipeline.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Simplicity & YAGNI
+Features are added only when there is a confirmed, documented requirement. Abstractions
+are introduced only when at least three concrete use cases exist. Complexity MUST be
+justified in writing in the implementation plan (Complexity Tracking table) before any
+implementation begins.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technology Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Monetary values MUST be represented using a `Decimal` type or language-equivalent
+  (not `float` / `double`).
+- All external inputs (rates, loan amounts, borrower data) MUST be validated at system
+  boundaries before processing; trust no upstream caller.
+- No personally identifiable information (PII) may be written to logs in plain text;
+  structured logging MUST mask or omit sensitive fields.
+- Dependencies MUST be pinned to exact versions in lockfiles; open version ranges are
+  not permitted in production manifests.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- All features begin with `/speckit-specify` → `/speckit-plan` → `/speckit-tasks`
+  before any code is written.
+- A Constitution Check (per plan-template.md) MUST pass before Phase 0 research and
+  again after Phase 1 design.
+- Pull requests require at least one peer review and all CI checks green before merge.
+- No feature flag or backwards-compatibility shim may be introduced without explicit
+  justification recorded in the implementation plan.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices. Amendments require:
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+1. A written proposal describing the change and its rationale.
+2. Explicit approval by the project lead.
+3. A migration plan for any existing code that would violate the updated principle.
+4. A version bump following the policy below.
+
+**Versioning policy**:
+- MAJOR: Principle removals, redefinitions, or backward-incompatible governance changes.
+- MINOR: New principle or section added, or materially expanded guidance.
+- PATCH: Clarifications, wording fixes, or non-semantic refinements.
+
+All PRs and code reviews MUST verify compliance with this constitution. Violations MUST
+be documented in the plan's Complexity Tracking table before implementation begins.
+
+**Version**: 1.0.0 | **Ratified**: 2026-05-30 | **Last Amended**: 2026-05-30
